@@ -1,4 +1,4 @@
-# SoftUbi - Python Web Basics - May 2023
+# SoftUni - Python Web Basics - May 2023
 
 In this repository there are solutions to tasks from the Python Web Basics of the software academy of SoftUni University.
 

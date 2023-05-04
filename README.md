@@ -23,8 +23,8 @@ Online judge system - https://judge.softuni.org/
 - Django Forms - Part 2
 - Workshop: Part 3
 - Exam Preparation
-- Retake Mid Exam
-- Retake Final Exam
+- Regular Exam
+- Retake Exam
 
 
 # Additional resources:

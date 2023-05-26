@@ -15,13 +15,13 @@ Online judge system - https://judge.softuni.org/
 - Django Introduction
 - URLs and Views
 - Django Templates
-- Workshop: Part 1
+- Workshop - Part 1
 - Models in Django - Part 1
 - Models in Django - Part 2
-- Workshop: Part 2
+- Workshop - Part 2
 - Django Forms - Part 1
 - Django Forms - Part 2
-- Workshop: Part 3
+- Workshop - Part 3
 - Exam Preparation
 - Regular Exam
 - Retake Exam

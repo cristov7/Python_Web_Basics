@@ -1,6 +1,6 @@
 # urls for tasks app
 from django.urls import path
-from tasks.views import index, list_tasks, list_tasks_template
+from django101.tasks.views import index, list_tasks, list_tasks_template
 
 urlpatterns = [
     path('', index),

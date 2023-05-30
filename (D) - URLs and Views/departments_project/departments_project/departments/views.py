@@ -13,13 +13,13 @@ def index(request):                      # receive request from 'path('', index)
     # # return response on the 'http://127.0.0.1:8000/departments/'
 
 
-def details(request, department_id):           # receive request from 'path('department_id', details)':
-    print(f'Print request: {request}')         # Print request: <WSGIRequest: GET '/departments/1'>
+def details(request, department_id):           # receive request from 'path('<int:department_id>/', details)':
+    print(f'Print request: {request}')         # Print request: <WSGIRequest: GET '/departments/1/'>
     print(f'Department ID: {department_id}')   # Department ID: 1
     print(f'Type ID: {type(department_id)}')   # Type ID: <class 'int'>
 
     # return HttpResponse('details')
-    # # return response on the 'http://127.0.0.1:8000/departments/1': details
+    # # return response on the 'http://127.0.0.1:8000/departments/1/': details
 
     department_dict = {1: 'Developer',
                        2: 'QA'}

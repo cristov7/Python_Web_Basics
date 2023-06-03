@@ -1,0 +1,55 @@
+{# Child template #}
+
+
+<!-- Always use the extends tag in the "child" templates -->
+{% extends 'base.html' %}
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- title -->
+    <!-- Template Inheritance -->
+    <title>
+
+        {% block page_title %}
+            About Page
+        {% endblock %}
+
+    </title>
+
+
+    <!-- style -->
+    <!-- Template Inheritance -->
+    {% block styles %}
+
+    <style>
+        h1 {color: red;}
+    </style>
+
+    {% endblock %}
+</head>
+
+<body>
+    <!-- Template Inheritance -->
+    {% block page_content %}
+
+
+    <div>
+        <p>This is 'About Page'!</p>
+
+        <p>Index link:
+            <a href="{% url 'index' %}">'http://127.0.0.1:8000/'</a>
+            {# <a href="http://127.0.0.1:8000/">'http://127.0.0.1:8000/'</a> #}
+        will redirect to 'http://127.0.0.1:8000/'!</p>
+    </div>
+
+
+    {% endblock %}
+</body>
+
+</html>

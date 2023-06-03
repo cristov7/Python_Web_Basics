@@ -1,0 +1,211 @@
+{# Child template #}
+
+
+<!-- Always use the extends tag in the "child" templates -->
+<!-- Template Inheritance -->
+{% extends 'base.html' %}
+
+
+{% load filters %}
+{% load tags %}
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- title -->
+    <!-- Template Inheritance -->
+    <title>
+
+        {% block page_title %}
+            Index Page
+        {% endblock %}
+
+    </title>
+
+
+    <!-- style -->
+    <!-- Template Inheritance -->
+    {% block styles %}
+
+    <style>
+        h1 {color: green;}
+    </style>
+
+    {% endblock %}
+</head>
+
+<body>
+    {% block page_content %}
+
+
+    <!-- Django Template Language Variables -->
+    <section>
+        <div>
+            <!-- Access dictionary values -->
+            <h1>Menu: {{title}}</h1>
+
+            <!-- Access dictionary values by using the dot notation -->
+            <p>{{key.nested_key}}</p>
+
+            <!-- Access dictionary values -->
+            <p>Age: {{student_age}}</p>
+        </div>
+    </section>
+
+
+    <!-- Use a pipe "|" to apply a filter to a variable -->
+    <section>
+        <div>
+            <!-- Change the variable to uppercase -->
+            <p>Upper: {{title|upper}}</p>
+
+            <!-- Change the variable to lowercase -->
+            <p>Lower: {{title|lower}}</p>
+
+            <!-- Calculate the length of the variable -->
+            <p>Length: {{title|length}}</p>
+
+            <!-- Change the first char to uppercase -->
+            <p>{{key.nested_key|capfirst}} (Change the first char to uppercase)</p>
+
+            <!-- Join list elements -->
+            <p>Students: {{students_list|join:', '}}</p>
+
+            <!-- Format a date according to the given format -->
+            <p>Date: {{date_now}}</p>
+
+            <!-- Format a date according to the given format -->
+            <p>Filter date: {{date_now|date:'Y-m-d'}}</p>
+
+            <!-- Display the first N chars of a string (including "…" as a char) -->
+            <p>{{title|truncatechars:2}}</p>
+
+            <!-- Display the first N words of a string (without "…" as a char) -->
+            <p>{{key.nested_key|truncatewords:1}}</p>
+
+            <!-- Formats a float value to the N-th decimal place -->
+            <p>Float number: {{float_number|floatformat:2}}</p>
+        </div>
+    </section>
+
+
+    <!-- Tags: if, for, url, csrf_token -->
+    <section>
+        <!-- if tag -->
+        <div>
+            <li>if tag:</li>
+
+
+            {% if empty_students_list %}
+                <p>Empty students list: {{empty_students_list|join:', '}}</p>
+
+            {% elif students_list %}
+                <p>Students list: {{students_list|join:', '}}</p>
+
+            {% elif students_list|length < 3 or empty_students_list|length < 3 %}
+                <p>Not enough students for a group!</p>
+
+            {% else %}
+                <p>No students!</p>
+
+            {% endif %}
+        </div>
+
+        <!-- for tag -->
+        <div>
+            <li>for tag:</li>
+
+
+            {% for name in students_list %}
+                <p>Name: {{name}}</p>
+
+            {% ifchanged %}   <!-- only unique names -->
+                <p>Unique name: {{name}}</p>
+            {% endifchanged %}
+
+            {% empty %}   <!-- if not students_list -->
+                <p>No students in this list!</p>
+
+            {% endfor %}
+        </div>
+
+        <!-- url tag -->
+        <div>
+            <li>url tag:</li>
+
+
+            <p>Contact link:
+                <a href="{% url 'contact page' %}">'http://127.0.0.1:8000/contact/'</a>
+                {# <a href="http://127.0.0.1:8000/contact/">'http://127.0.0.1:8000/'</a> #}
+            will redirect to 'http://127.0.0.1:8000/'!</p>
+
+            <p>Index link:
+                <a href="{% url 'index' %}">'http://127.0.0.1:8000/'</a>
+                {# <a href="http://127.0.0.1:8000/">'http://127.0.0.1:8000/'</a> #}
+            will reload the page!</p>
+        </div>
+
+        <!-- csrf_token -->
+        <div>
+            <li>csrf_token tag:</li>
+
+
+            <p>{{csrf_token}}</p>
+            <p>{% csrf_token %}</p>
+        </div>
+    </section>
+
+
+    <!-- Custom Filters -->
+    <section>
+        <div>
+            <li>Custom Filters:</li>
+
+
+            <p>Without filters: {{numbers_list}}</p>
+            <p>With odd - custom filter: {{numbers_list|odd}}</p>
+        </div>
+    </section>
+
+
+    <!-- Custom Tags -->
+    <section>
+        <li>Custom Tags:</li>
+
+        <!-- simple_tag -->
+        <div>
+            <li>simple_tag:</li>
+
+
+            {% for student_obj in student_objects_list %}
+                <p>{% show_student_info student_obj %}</p>
+            {% endfor %}
+        </div>
+
+        <!-- inclusion_tag -->
+        <div>
+            <li>inclusion_tag:</li>
+
+
+            {% for student_obj in student_objects_list %}
+                <p>{% fancy_student student_obj %}</p>
+            {% endfor %}
+        </div>
+    </section>
+
+
+    <!-- Including Template Snippets -->
+    <section>
+        {% include 'examples/another.html' %}
+    </section>
+
+
+    {% endblock %}
+</body>
+
+</html>

@@ -121,8 +121,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-    # os.path.join(BASE_DIR, 'static'),
+    BASE_DIR / 'static',                  # 'static' the name of the static directory
+    # os.path.join(BASE_DIR, 'static'),   # for this you have to: import os
 ]
 
 # Default primary key field type

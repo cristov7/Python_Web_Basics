@@ -59,10 +59,7 @@ def index(request):
 
         'student_objects_list': [Student('Alex', 18),
                                  Student('Bobby', 19),
-                                 Student('Clara', 20)],
-
-
-        'logged_in': True
+                                 Student('Clara', 20)]
     }
 
     return render(request, template_name, context)

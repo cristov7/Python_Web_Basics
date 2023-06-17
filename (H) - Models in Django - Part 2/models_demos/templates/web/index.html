@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web</title>
+</head>
+
+<body>
+    <h1>It works!</h1>
+
+    <section>
+        <div>
+            <p>Retrieve ALL OBJECTS:</p>
+
+            {% for employee in employees_objects_all %}
+                <p> - {{ employee.first_name }} {{ employee.last_name }}
+                    <a href="{% url 'delete' pk=employee.pk %}"> Delete</a>
+                    <a href="{{ employee.get_absolute_url }}"> Details</a>
+                </p>
+            {% endfor %}
+        </div>
+
+        <br>
+
+        <div>
+            <p>Return OBJECTS that MATCH given parameters: 'department_id=1, age__gt=20, age__lt=35'</p>
+
+            {% for employee in employees_objects_filter %}
+                <p> - Department ID: {{ employee.department_id }} - {{ employee.first_name }} {{ employee.last_name }} - {{ employee.age }} years
+                    <a href="{% url 'details_department' pk=employee.department.pk slug=employee.department.slug %}">{{ employee.department.name }}</a>
+                </p>
+            {% endfor %}
+        </div>
+
+        <br>
+
+        <div>
+            <p>Return OBJECTS that do NOT MATCH given parameters: 'age=25' order_by="first_name"</p>
+
+            {% for employee in employees_objects_exclude %}
+                <p> - {{ employee.first_name }} {{ employee.last_name }} - {{ employee.age }} years old</p>
+            {% endfor %}
+        </div>
+
+            <br>
+
+        <div>
+            <p>Return only ONE OBJECT that MATCHES your query: 'age=25'</p>
+
+            <p> - {{ employee_object_get.first_name }} {{ employee_object_get.last_name }} - {{ employee_object_get.age }}  years old</p>
+        </div>
+
+            <br>
+
+        <div>
+            <p>Get the desired OBJECT or raise an HTTP 404: 'first_name="Peter"'</p>
+
+            <p> - {{ employee_get_object_or_404.first_name }} {{ employee_get_object_or_404.last_name }}</p>
+        </div>
+
+            <br>
+
+        <div>
+            <p>Get the desired queryset (casted to LIST) or raise an HTTP 404: 'age__gt=20'</p>
+
+            {% for employee in employees_get_list_or_404 %}
+                <p> - {{ employee.first_name }} {{ employee.last_name }} - {{ employee.age }} years old</p>
+            {% endfor %}
+        </div>
+
+            <br>
+
+        <div>
+            <p>Salary: {{ salary.amount }} {{ salary.currency }}</p>
+            <p>Salary with taxes: {{ salary.with_taxes_amount }} {{ salary.currency }}</p>
+            <p>{{ salary }}</p>
+        </div>
+    </section>
+</body>
+
+</html>

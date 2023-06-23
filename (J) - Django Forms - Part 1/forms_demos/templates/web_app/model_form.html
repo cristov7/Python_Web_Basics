@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ModelForm</title>
+</head>
+
+<body>
+    <h1>Name: {{ person_obj.name }} / Age: {{ person_obj.age }} / Password: {{ person_obj.password }}</h1>
+
+
+    <form action="{% url 'model form' pk=person_obj.pk %}" method="POST">
+        {% csrf_token %}
+
+        <table>
+            {{ form.as_table }}
+        </table>
+
+        <!-- <div> -->
+            <!-- {{ form.as_div }} -->
+        <!-- </div> -->
+
+        <button type="submit">Enter</button>
+        {# <input type='submit' value='Enter'> #}
+    </form>
+</body>
+
+</html>

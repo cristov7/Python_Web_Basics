@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+
+<body>
+    {% if name and age and password %}
+        <h1>Name: {{ name }} / Age: {{ age }} / Password: {{ password }}</h1>
+    {% else %}
+        <h1>Please enter data!</h1>
+    {% endif %}
+
+
+    <form action="{% url 'index' %}" method="POST">
+        {% csrf_token %}
+
+        <!-- {{ form.as_ul }} -->
+        {{ form.as_p }}
+
+        <button type="submit">Enter</button>
+        {# <input type='submit' value='Enter'> #}
+    </form>
+</body>
+
+</html>

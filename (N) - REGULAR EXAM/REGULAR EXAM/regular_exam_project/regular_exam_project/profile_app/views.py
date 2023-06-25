@@ -7,11 +7,15 @@ from django.shortcuts import render, redirect
 def profile_create_page_func(request: HttpRequest):
     template_name = 'profile_app/create-profile.html'
 
-    form = ProfileModelForm(request.POST or None)
+    if request.method == 'POST':
+        form = ProfileModelForm(request.POST)
 
-    if form.is_valid():
-        form.save()
-        return redirect('dashboard page')
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard page')
+
+    else:   # request.method == 'GET':
+        form = ProfileModelForm()
 
     context = {'form': form}
 
@@ -20,8 +24,7 @@ def profile_create_page_func(request: HttpRequest):
 
 def profile_details_page_func(request: HttpRequest):
     template_name = 'profile_app/details-profile.html'
-    context = {}
-    return render(request, template_name, context)
+    return render(request, template_name)
 
 
 def profile_edit_page_func(request: HttpRequest):
@@ -40,11 +43,11 @@ def profile_edit_page_func(request: HttpRequest):
 
 def profile_delete_page_func(request: HttpRequest):
     template_name = 'profile_app/delete-profile.html'
+
     profile_object = profile_status()
 
     if request.method == 'POST':
         profile_object.delete()
         return redirect('index page')
 
-    context = {}
-    return render(request, template_name, context)
+    return render(request, template_name)

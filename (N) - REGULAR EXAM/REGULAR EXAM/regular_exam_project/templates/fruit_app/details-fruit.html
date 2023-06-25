@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 
-
 {% block main_content %}
     <main>
-
         <!-- Fruit Details -->
         <section id="details">
             <div id="details-wrapper">
@@ -14,17 +12,12 @@
                 <div id="info-wrapper">
                     <div id="details-description">
                         <!-- fruit description -->
-                        <p>
-                            {{ fruit_object.description }}
-                        </p>
+                        <p>{{ fruit_object.description }}</p>
                         <!-- fruit nutrition -->
                         <p id="nutrition">Nutrition</p>
                         <!-- fruit nutrition details -->
-                        <p id="details-nutrition">
-                            {{ fruit_object.nutrition }}
-                        </p>
+                        <p id="details-nutrition">{{ fruit_object.nutrition }}</p>
                     </div>
-
                     <!--Edit and Delete buttons -->
                     <div id="action-buttons">
                         <a href="{% url 'fruit edit page' pk=fruit_object.pk %}" id="edit-btn">Edit</a>
@@ -33,6 +26,5 @@
                 </div>
             </div>
         </section>
-
     </main>
 {% endblock %}

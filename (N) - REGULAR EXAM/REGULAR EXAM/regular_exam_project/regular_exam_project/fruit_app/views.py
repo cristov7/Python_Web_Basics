@@ -7,19 +7,20 @@ from django.shortcuts import render, redirect
 def fruit_create_page_func(request: HttpRequest):
     template_name = 'fruit_app/create-fruit.html'
 
-    form = FruitModelForm()
+    profile_object = profile_status()
 
     if request.method == 'POST':
-        user = profile_status()
         data = request.POST.copy()
+        data['profile'] = profile_object.pk
 
-        data['profile'] = user.pk
         form = FruitModelForm(data)
 
         if form.is_valid():
             form.save()
-
             return redirect('dashboard page')
+
+    else:   # request.method == 'GET':
+        form = FruitModelForm()
 
     context = {'form': form}
 
@@ -28,11 +29,7 @@ def fruit_create_page_func(request: HttpRequest):
 
 def fruit_details_page_func(request: HttpRequest, pk: int):
     template_name = 'fruit_app/details-fruit.html'
-
-    fruit_object = FruitModel.objects.get(pk=pk)
-
-    context = {'fruit_object': fruit_object}
-
+    context = {'fruit_object': FruitModel.objects.get(pk=pk)}
     return render(request, template_name, context)
 
 
@@ -40,7 +37,6 @@ def fruit_edit_page_func(request: HttpRequest, pk: int):
     template_name = 'fruit_app/edit-fruit.html'
 
     fruit_object = FruitModel.objects.get(pk=pk)
-    form = EditFruitModelForm(instance=fruit_object)
 
     if request.method == 'POST':
         form = EditFruitModelForm(request.POST, instance=fruit_object)
@@ -48,6 +44,9 @@ def fruit_edit_page_func(request: HttpRequest, pk: int):
         if form.is_valid():
             form.save()
             return redirect('dashboard page')
+
+    else:   # request.method == 'GET':
+        form = EditFruitModelForm(instance=fruit_object)
 
     context = {'form': form}
 
@@ -58,11 +57,11 @@ def fruit_delete_page_func(request: HttpRequest, pk: int):
     template_name = 'fruit_app/delete-fruit.html'
 
     fruit_object = FruitModel.objects.get(pk=pk)
-    form = DeleteFruitModelForm(instance=fruit_object)
 
     if request.method == 'POST':
         fruit_object.delete()
         return redirect('dashboard page')
 
-    context = {'form': form}
+    context = {'form': DeleteFruitModelForm(instance=fruit_object)}
+
     return render(request, template_name, context)

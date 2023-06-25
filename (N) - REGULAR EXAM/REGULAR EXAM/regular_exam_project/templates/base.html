@@ -2,7 +2,7 @@
 
 {% load custom_tags %}
 
-{% profile_status as profile %}
+{% profile_status as profile_object %}
 
 <!DOCTYPE html>
 
@@ -19,38 +19,18 @@
 </head>
 
 <body>
-<div id="wrapper">
-    <header>
-        <!-- Navigation -->
-        <a id="logo" href="{% url 'index page' %}">
-            <img id="logo-img" src="{% static '/images/logo.png' %}" alt="logo"/>
-        </a>
+    <div id="wrapper">
+        <!-- Including Template Snippets -->
+        {% include 'partials/header.html' %}
 
-        <nav>
-            <!-- If there is a user profile -->
-            {% if profile %}
-            <div class="user">
-                <a href="{% url 'dashboard page' %}">Dashboard</a>
-                <a href="{% url 'fruit create page' %}">Add Fruit</a>
-                <a href="{% url 'profile details page' %}">Profile</a>
-            </div>
+        <!-- Template Inheritance -->
+        {% block main_content %}
+            <!-- <main>...</main> -->
+        {% endblock %}
 
-            <!-- If user profile has NOT been created -->
-            {% else %}
-            <div class="guest">
-                <a href="{% url 'profile create page' %}">Create Profile</a>
-            </div>
-            {% endif %}
-        </nav>
-    </header>
+    </div>
+    <!-- Including Template Snippets -->
+    {% include 'partials/footer.html' %}
+</body>
 
-    {% block main_content %}
-    {% endblock %}
-
-        </div>
-<!-- footer -->
-    <footer>
-      <p>@Fruitipedia - SoftUni Team 2023. All rights reserved.</p>
-    </footer>
-  </body>
 </html>

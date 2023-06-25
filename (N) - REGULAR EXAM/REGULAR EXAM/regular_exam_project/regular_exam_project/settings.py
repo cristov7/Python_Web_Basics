@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     # Third-party apps:
 
     # Application apps:
-    'regular_exam_project.fruitipedia_app',
     'regular_exam_project.fruit_app',
+    'regular_exam_project.fruitipedia_app',
     'regular_exam_project.profile_app'
 ]
 

@@ -44,7 +44,7 @@ class DeleteFruitModelForm(forms.ModelForm):
                   'image_url': 'Image URL:',
                   'description': 'Description:'}
 
-    def __int__(self, *args, **kwargs):
-        super().__init__(self, *args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['disabled'] = 'disabled'

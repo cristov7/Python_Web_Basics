@@ -1,0 +1,54 @@
+{% extends 'shared/../base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+    <!-- The Main Content for the Profile Details section -->
+    <section id="details">
+
+        <!-- Title of the Page -->
+        <h2>Profile Details</h2>
+
+        <div id="details-wrapper">
+
+            <div class="profile-details-container">
+
+                <!-- Default profile image (if the user does NOT have any)-->
+                {% if not profile_object.profile_picture %}
+                    <img class="profile-image" src="{% static 'images/profile_image.avif' %}" alt='profile-image'/>
+
+                <!-- Profile image set by the user -->
+                {% else %}
+                    <img class="profile-image" src="{{ profile_object.profile_picture }}" alt="Profile Picture"/>
+
+                {% endif %}
+
+                <div>
+                    <!-- Profile Name -->
+                    <p id="profile-details">Name: <span
+                            id="info">{{ profile_object.full_name }}</span>
+                    </p>
+
+                    <!-- Email -->
+                    <p id="profile-details">
+                        Email: <span id="info">{{ profile_object.email }}</span>
+                    </p>
+
+                    <!-- Created Events -->
+                    <p id="profile-details">
+                        Created Events: <span id="info">{{ total_number_of_events }}</span></p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Edit and Delete Buttons -->
+        <div id="action-buttons">
+            <a href="{% url 'edit profile page' %}" id="edit-btn">Edit</a>
+            <a href="{% url 'delete profile page' %}" id="delete-btn">Delete</a>
+        </div>
+
+    </section>
+    <!-- End Profile Details section -->
+{% endblock %}

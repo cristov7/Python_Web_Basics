@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <!-- Title of the Page -->
+    <h2>Current Events</h2>
+
+    <!-- The Main Content for the Dashboard Event section -->
+    <section id="dashboard">
+
+        <!-- Display paragraph: If there are no events yet -->
+        {% if not all_event_objects %}
+            <h4>There are no Events in the Dashboard!</h4>
+
+        <!-- Display a <div> with information about every post (if any)-->
+        {% else %}
+
+            {% for event_object in all_event_objects %}
+
+                <!-- Card-Box in dashboard -->
+                <div class="event">
+                    <!-- Event Image -->
+                    <img src="{{ event_object.event_image }}" alt="Robert De Niro Themed Party Image"/>
+
+                    <!-- Event Name -->
+                    <div class="event-details">
+                        <p class="title">
+                            {{ event_object.event_name }}
+                        </p>
+
+                        <!-- Event Date -->
+                        <p class="date">{{ event_object.date }}</p>
+                    </div>
+
+                    <!-- Details Button -->
+                    <a class="details-btn" href="{% url 'event details page' pk=event_object.pk %}">Details</a>
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    </section>
+    <!-- End Dashboard Event section -->
+{% endblock %}

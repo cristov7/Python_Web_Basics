@@ -1,0 +1,26 @@
+{% load static %}
+
+<header>
+    <!-- A logo in the top left corner that serves as a link to the Home Page -->
+    <a id="logo" href="{% url 'home page' %}"><img id="logo-img" src="{% static 'images/logo.png' %}" alt="logo"/></a>
+
+    <!-- Navigation Bar section -->
+    <nav>
+        <!-- If the user has not created a profile yet -->
+        {% if not profile_object %}
+            <div class="guest">
+                <a href="{% url 'create profile page' %}">Create Profile</a>
+            </div>
+
+        <!-- If the user has created a profile -->
+        {% else %}
+            <div class="user">
+                <a href="{% url 'dashboard page' %}">Events</a>
+                <a href="{% url 'create event page' %}">Add Event</a>
+                <a href="{% url 'profile details page' %}">Profile</a>
+            </div>
+
+        {% endif %}
+    </nav>
+    <!-- Navigation Bar section -->
+</header>

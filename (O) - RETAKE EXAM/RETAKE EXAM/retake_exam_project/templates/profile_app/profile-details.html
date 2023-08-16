@@ -1,4 +1,4 @@
-{% extends 'shared/../base.html' %}
+{% extends 'base.html' %}
 
 {% load static %}
 
@@ -25,9 +25,11 @@
 
                 <div>
                     <!-- Profile Name -->
-                    <p id="profile-details">Name: <span
-                            id="info">{{ profile_object.full_name }}</span>
-                    </p>
+                    {% if profile_object.first_name and profile_object.last_name %}
+                        <p id="profile-details">Name: <span
+                                id="info">{{ profile_object.full_name }}</span>
+                        </p>
+                    {% endif %}
 
                     <!-- Email -->
                     <p id="profile-details">
